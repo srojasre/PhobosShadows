@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[REDACTED]</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="container">
+        <h1 class="flicker">PHOBOS SHADOWS</h1>
+        <p>Security protocol activated. Click the message. Good luck.</p>
+        
+        <div id="encrypted-box">
+            <!-- 
+              IMPORTANTE: Cambia la palabra dentro de data-palabra-descifrada
+              por la palabra secreta que quieras usar.
+              Ahora respetará mayúsculas y minúsculas.
+              Ejemplo: data-palabra-descifrada="Phobos7"
+            -->
+            <div id="encrypted-text" data-palabra-descifrada="NzYxRjM3">Loading data...</div>
+        </div>
+
+        <div class="footer">
+            <p>LEVEL CLEAREANCE: O5</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const encryptedTextElement = document.getElementById('encrypted-text');
+            
+            // --- CAMBIO 1: Se eliminó .toUpperCase() ---
+            // Ahora la palabra se toma exactamente como está escrita en el HTML.
+            const decryptedWord = encryptedTextElement.dataset.palabraDescifrada;
+            
+            // --- CAMBIO 2: Se añadieron minúsculas al alfabeto de la animación ---
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789*&%$#@!';
+            
+            let intervalId = null;
+            let isDecrypting = false;
+
+            // Efecto de texto aleatorio inicial
+            const startScramble = () => {
+                if (isDecrypting) return;
+                let scrambleCount = 0;
+                intervalId = setInterval(() => {
+                    let scrambledText = '';
+                    for (let i = 0; i < decryptedWord.length; i++) {
+                        scrambledText += alphabet[Math.floor(Math.random() * alphabet.length)];
+                    }
+                    encryptedTextElement.textContent = scrambledText;
+                    scrambleCount++;
+                    if (scrambleCount > 50 && !isDecrypting) {
+                        encryptedTextElement.textContent = '■'.repeat(decryptedWord.length);
+                        clearInterval(intervalId);
+                    }
+                }, 100);
+            };
+
+            // Efecto de descifrado al hacer clic
+            const decryptText = () => {
+                if (isDecrypting) return;
+                isDecrypting = true;
+                clearInterval(intervalId);
+
+                let iteration = 0;
+                
+                const interval = setInterval(() => {
+                    encryptedTextElement.textContent = decryptedWord.split('')
+                        .map((letter, index) => {
+                            if (index < iteration) {
+                                return decryptedWord[index];
+                            }
+                            return alphabet[Math.floor(Math.random() * alphabet.length)];
+                        })
+                        .join('');
+
+                    if (iteration >= decryptedWord.length) {
+                        clearInterval(interval);
+                        encryptedTextElement.textContent = decryptedWord;
+                        encryptedTextElement.classList.add('decrypted');
+                    }
+
+                    iteration += 1 / 3;
+                }, 50);
+            };
+
+            encryptedTextElement.addEventListener('click', decryptText);
+
+            startScramble();
+        });
+    </script>
+</body>
+</html>

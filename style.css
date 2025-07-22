@@ -1,0 +1,135 @@
+/* --- Estilos Generales --- */
+:root {
+    --primary-color: rgb(255, 0, 0); /* Verde "hacker" */
+    --background-color: #0a0a0a;
+    --dark-color: #050505;
+    --glow-color: rgba(255, 0, 8, 0.5);
+    --glow-color-light: rgba(255, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    font-family: 'Source Code Pro', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-shadow: 0 0 5px var(--glow-color);
+    overflow: hidden; /* Oculta el desbordamiento para el efecto scanline */
+}
+
+/* --- Efecto de línea de escaneo (CRT) --- */
+.scanline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(18, 16, 16, 0) 50%,
+        rgba(0, 0, 0, 0.25) 50%
+    );
+    background-size: 100% 4px;
+    z-index: 2;
+    pointer-events: none; /* Permite hacer clic a través de él */
+    animation: scan 10s linear infinite;
+}
+
+@keyframes scan {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100vh; }
+}
+
+
+/* --- Contenedor principal --- */
+.container {
+    text-align: center;
+    padding: 20px;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+}
+
+/* --- Animación de parpadeo para el título --- */
+.flicker {
+    animation: flicker 3s linear infinite;
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow:
+            0 0 4px var(--primary-color),
+            0 0 11px var(--primary-color),
+            0 0 19px var(--primary-color),
+            0 0 40px var(--glow-color),
+            0 0 80px var(--glow-color),
+            0 0 90px var(--glow-color);
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+p {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 2rem;
+}
+
+/* --- Caja del texto encriptado --- */
+#encrypted-box {
+    border: 2px solid var(--primary-color);
+    padding: 20px 30px;
+    background-color: var(--dark-color);
+    box-shadow: 0 0 15px var(--glow-color-light) inset;
+    margin-bottom: 2rem;
+}
+
+#encrypted-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    min-height: 48px; /* Evita que la caja salte de tamaño */
+    user-select: none; /* Evita que el texto se pueda seleccionar */
+}
+
+#encrypted-text:hover {
+    background-color: var(--glow-color-light);
+    color: #fff;
+}
+
+/* Estilo para cuando la palabra ya está descifrada */
+#encrypted-text.decrypted {
+    color: #fff;
+    text-shadow: 0 0 10px #fff, 0 0 20px var(--primary-color);
+    cursor: default;
+}
+
+/* --- Pie de página --- */
+.footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.footer p {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    letter-spacing: 2px;
+}
