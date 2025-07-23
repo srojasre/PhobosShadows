@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -44,8 +44,8 @@
         <p id="feedback-message" style="opacity: 0.5; min-height: 24px;"></p>
 
         <div id="next-challenge" style="display: none;">
-            <p>PROTOCOL KEY 3 ACQUIRED. Record it.</p>
-            <a href="final.html" class="button-link">Access Core</a>
+            <p>Note it</p>
+            <a href="dudenedkfieiahdsalsdke.html" class="button-link">Next</a>
         </div>
         
         <div class="footer">
@@ -54,8 +54,12 @@
     </div>
 
    <script>
-    (() => {
-        const CORRECT_KEY = atob("QVJFU19QUk9UT0NPTF83");
+    (() => { // Script 3
+        const KEY2 = atob("QVJFU19QUk9UT0NPTF83");
+        const KEY1 = atob("QVJFU19QUk9UT0NPTF81");
+        const KEY5 = atob("QVJFU19QUk9UT0NPTF84");
+        const KEY0 = atob("QVJFU19QUk9UT0NPTF8xMA==");
+        
 
         const antiCheat = () => { debugger; };
         let antiCheatInterval = setInterval(antiCheat, 1000);
@@ -66,13 +70,39 @@
         const nextChallengeElement = document.getElementById('next-challenge');
 
         const verify = () => {
-            if (inputElement.value === CORRECT_KEY) {
-                feedbackElement.textContent = "ACCESS GRANTED";
+            if (inputElement.value === KEY2) {
+                feedbackElement.textContent = "ACCESS GRANTED send this to Wit"; // Trap
                 feedbackElement.style.color = "#0f0";
                 document.querySelector('.input-area').style.display = 'none';
                 nextChallengeElement.style.display = 'block';
                 clearInterval(antiCheatInterval); // Stop anti-cheat
-            } else {
+            }
+
+            else if (inputElement.value === KEY1) {
+                feedbackElement.textContent = "ACCESS GRANTED send this to Defender"; // Real
+                feedbackElement.style.color = "#0f0";
+                document.querySelector('.input-area').style.display = 'none';
+                nextChallengeElement.style.display = 'block';
+                clearInterval(antiCheatInterval); // Stop anti-cheat
+            }
+
+            else if (inputElement.value === KEY0) {
+                feedbackElement.textContent = "ACCESS GRANTED send this to Sky"; // Trap
+                feedbackElement.style.color = "#0f0";
+                document.querySelector('.input-area').style.display = 'none';
+                nextChallengeElement.style.display = 'block';
+                clearInterval(antiCheatInterval); // Stop anti-cheat
+            }
+            else if (inputElement.value === KEY5) {
+                feedbackElement.textContent = "ACCESS GRANTED sned this to Elwa"; // real
+                feedbackElement.style.color = "#0f0";
+                document.querySelector('.input-area').style.display = 'none';
+                nextChallengeElement.style.display = 'block';
+                clearInterval(antiCheatInterval); // Stop anti-cheat
+            }
+            
+            
+            else {
                 feedbackElement.textContent = "ACCESS DENIED. Try again.";
                 feedbackElement.style.color = "var(--primary-color)";
                 inputElement.value = "";

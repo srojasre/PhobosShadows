@@ -62,15 +62,17 @@
     </div>
 
     <script>
-        (() => {
+        (() => { // FInal
             
-            const REAL_KEY_1 = atob("TnpZeFJqTTM="); 
-            const REAL_KEY_2 = atob("UGhvYm9zVGVybWluYWw="); 
-            const REAL_KEY_3 = atob("QVJFU19QUk9UT0NPTF83"); 
+            const KEY20 = atob("TnpZeFJqTTM="); 
+            const KEY30 = atob("UGhvYm9zVGVybWluYWw="); 
+            const KEY40 = atob("QVJFU19QUk9UT0NPTF83"); 
+            const KEY50 = "DeimosTerminal";
+            const KEY10 = atob("QUxXQVlT"); 
+            const KEY12 = atob("V0FUQ0hJTkdf")
+            const KEY22 = atob("QVJFU19URVJNSU5BTF82DQo=")
+            
 
-           
-            const FAKE_KEY_HTML = "DeimosTerminal";
-            const FAKE_KEY_JS = atob("QVJFU19QUk9UT0NPTF82"); // "ARES_PROTOCOL_6"
 
            
             const antiCheat = () => { debugger; };
@@ -89,20 +91,21 @@
                 const input3 = keyInput3.value;
 
                 
-                if (input2 === FAKE_KEY_HTML || input3 === FAKE_KEY_JS) {
+                if (input2 === KEY50 || input3 === KEY10) {
                     messageDiv.innerHTML = `
-                        <p style="color: #ffcc00;">[SECURITY ALERT]</p>
-                        <p style="opacity: 0.6;">DECOY KEY DETECTED. Rerouting system trace...</p>
+                        <h2 style="color: #0f0; text-shadow: 0 0 10px #0f0;">SYSTEM DISABLED</h2>
+                        <p>You have overcome the shadows of Phobos.</p>
+                        <p>Congratulations, agent send a "COOK" DM.</p> 
                     `;
                     keyInput1.value = "";
                     keyInput2.value = "";
                     keyInput3.value = "";
                 }
                 // 
-                else if (input1 === REAL_KEY_1 && input2 === REAL_KEY_2 && input3 === REAL_KEY_3) {
+                else if (input1 === KEY20 && input2 === KEY30 && input3 === KEY40) {
                     document.querySelector('.final-input-area').style.display = 'none';
                     document.querySelector('.container > p').style.display = 'none';
-                    clearInterval(antiCheatInterval); // Disable anti-cheat on success
+                    clearInterval(antiCheatInterval); 
 
                     messageDiv.innerHTML = `
                         <h2 style="color: #0f0; text-shadow: 0 0 10px #0f0;">SYSTEM DISABLED</h2>
@@ -110,11 +113,23 @@
                         <p>Congratulations, agent send a "NYAN" DM.</p>
                     `;
                 } 
+                else if (input1 === KEY20 && input2 === KEY12 && input3 === KEY22) {
+                    document.querySelector('.final-input-area').style.display = 'none';
+                    document.querySelector('.container > p').style.display = 'none';
+                    clearInterval(antiCheatInterval); 
+
+                    messageDiv.innerHTML = `
+                        <h2 style="color: #0f0; text-shadow: 0 0 10px #0f0;">SYSTEM DISABLED</h2>
+                        <p>You have overcome the shadows of Phobos.</p>
+                        <p>Congratulations, agent send a "PHOBOS" DM.</p>
+                    `;
+                } 
                 
                 else {
-                    messageDiv.innerHTML = `
-                        <p style="color: var(--primary-color);">INCORRECT SEQUENCE. FIREWALL ACTIVE.</p>
-                        <p style="opacity: 0.6;">Verify the keys and try again.</p>
+                   messageDiv.innerHTML = `
+                        <h2 style="color: #0f0; text-shadow: 0 0 10px #0f0;">SYSTEM DISABLED</h2>
+                        <p>You have overcome the shadows of Phobos.</p>
+                        <p>Congratulations, agent send a "SKY" DM.</p>
                     `;
                 }
             };

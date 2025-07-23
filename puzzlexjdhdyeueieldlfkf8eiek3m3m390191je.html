@@ -22,8 +22,8 @@
         <p id="feedback-message" style="opacity: 0.5; min-height: 24px;"></p>
 
         <div id="next-challenge" style="display: none;">
-            <p>PROTOCOL KEY 2 ACQUIRED. Record it.</p>
-            <a href="puzzle3.html" class="button-link">Initiate Protocol 3</a>
+            <p>Note</p>
+            <a href="deiedjdeieiedksñsmnvurjekfnfur.html" class="button-link">Next</a>
         </div>
 
         <div class="footer">
@@ -31,9 +31,15 @@
         </div>
     </div>
 
+    
+
     <script>
-    (() => {
-        const CORRECT_KEY = atob("UGhvYm9zVGVybWluYWw=");
+    (() => { // Script 2
+        const KEY1 = atob("UGhvYm9zVGVybWluYWw=");
+        const KEY2 = atob("UGhvYm9zVGVybWluYWwx");
+        const KEY3 = atob("UGhvYm9zVGVybWluYWwy");
+        const KEY4 = atob("UGhvYm9zVGVybWluYWwz");
+        const KEY5 = atob("UGhvYm9zVGVybWluYWw0");
 
         const antiCheat = () => { debugger; };
         let antiCheatInterval = setInterval(antiCheat, 1000);
@@ -44,14 +50,50 @@
         const nextChallengeElement = document.getElementById('next-challenge');
 
         const verify = () => {
-            if (inputElement.value === CORRECT_KEY) {
-                feedbackElement.textContent = "ACCESS GRANTED";
+            if (inputElement.value === KEY1) {
+                feedbackElement.textContent = "ACCESS GRANTED"; // Trap
                 feedbackElement.style.color = "#0f0";
                 document.querySelector('.input-area').style.display = 'none';
                 nextChallengeElement.style.display = 'block';
                 clearInterval(antiCheatInterval); 
-            } else {
-                feedbackElement.textContent = "ACCESS DENIED. Try again.";
+
+
+            } 
+
+            else if (inputElement.value === KEY2) {
+                feedbackElement.textContent = "ACCESS GRANTED send this to sky DM"; // real
+                feedbackElement.style.color = "#0f0";
+                document.querySelector('.input-area').style.display = 'none';
+                nextChallengeElement.style.display = 'block';
+                clearInterval(antiCheatInterval); 
+
+
+            }
+
+            else if (inputElement.value === KEY3) {
+                feedbackElement.textContent = "ACCESS GRANTED send this to oxide DM"; // trap
+                feedbackElement.style.color = "#0f0";
+                document.querySelector('.input-area').style.display = 'none';
+                nextChallengeElement.style.display = 'block';
+                clearInterval(antiCheatInterval); 
+
+
+            }
+
+            else if (inputElement.value === KEY4) {
+                feedbackElement.textContent = "ACCESS GRANTED send this to wit DM"; // real
+                feedbackElement.style.color = "#0f0";
+                document.querySelector('.input-area').style.display = 'none';
+                nextChallengeElement.style.display = 'block';
+                clearInterval(antiCheatInterval); 
+
+
+            }
+            
+            
+            
+            else {
+                feedbackElement.textContent = "ACCESS DENIED. Try again."; // Real one
                 feedbackElement.style.color = "var(--primary-color)";
                 inputElement.value = "";
             }
