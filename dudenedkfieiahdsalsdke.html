@@ -40,17 +40,18 @@
 <body>
     <!-- 
         
-        TODO: Remove legacy access key "DeimosTerminal" before deployment.
+        TODO: Remove legacy access key "DeimosTerminal" before release.
     -->
     <div class="scanline"></div>
     <div class="container">
         <h1 class="flicker">SYSTEM CORE</h1>
-        <p>Enter the three protocol keys to disable the final firewall.</p>
+        <p>Enter the three protocol keys and your Discord User ID to disable the final firewall.</p>
 
         <div class="final-input-area">
             <input type="text" id="key1-input" placeholder="PROTOCOL KEY 1"><br>
             <input type="text" id="key2-input" placeholder="PROTOCOL KEY 2"><br>
             <input type="text" id="key3-input" placeholder="PROTOCOL KEY 3"><br>
+            <input type="text" id="discord-id-input" placeholder="DISCORD USER ID"><br>
             <button id="final-verify-button">DISABLE</button>
         </div>
 
@@ -61,81 +62,101 @@
         </div>
     </div>
 
-    <script>
-        (() => { // FInal
+   <script>
+        (() => {
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1397717208167088138/o3-9lk_UObfCIP7JdPKoHjppFjwpm2ibDHLAiySY97JnDQMBZ3iyhwMeWKN-UMXJY_N9";
+
+        const KEY10 = atob("QUxXQVlT");
+        const KEY12 = atob("V0FUQ0hJTkdf");
+        const KEY20 = atob("TnpZeFJqTTM=");
+        const KEY22 = atob("QVJFU19URVJNSU5BTF82");
+        const KEY30 = atob("UGhvYm9zVGVybWluYWw=");
+        const KEY40 = atob("QVJFU19QUk9UT0NPTF83");
+        const KEY50 = "DeimosTerminal"; // TODO
+
+        const antiCheat = () => { debugger; };
+        let antiCheatInterval = setInterval(antiCheat, 1000);
+
+        const button = document.getElementById('final-verify-button');
+        const msg = document.getElementById('final-message');
+        const [in1, in2, in3, discordIdIn] = [
+            'key1-input','key2-input','key3-input', 'discord-id-input'
+        ].map(id => document.getElementById(id));
+
+        const disableAntiCheat = () => clearInterval(antiCheatInterval);
+
+        const sendToWebhook = async (userId, code) => {
+            if (!WEBHOOK_URL.startsWith("https://discord.com/api/webhooks/")) {
+                console.error("Webhook URL is not configured or invalid.");
+                return;
+            }
             
-            const KEY20 = atob("TnpZeFJqTTM="); 
-            const KEY30 = atob("UGhvYm9zVGVybWluYWw="); 
-            const KEY40 = atob("QVJFU19QUk9UT0NPTF83"); 
-            const KEY50 = "DeimosTerminal";
-            const KEY10 = atob("QUxXQVlT"); 
-            const KEY12 = atob("V0FUQ0hJTkdf")
-            const KEY22 = atob("QVJFU19URVJNSU5BTF82DQo=")
-            
+            const userMention = `<@${userId}>`;
 
-
-           
-            const antiCheat = () => { debugger; };
-            let antiCheatInterval = setInterval(antiCheat, 1000);
-
-            // --- Element References ---
-            const button = document.getElementById('final-verify-button');
-            const messageDiv = document.getElementById('final-message');
-            const keyInput1 = document.getElementById('key1-input');
-            const keyInput2 = document.getElementById('key2-input');
-            const keyInput3 = document.getElementById('key3-input');
-            
-            const verifyKeys = () => {
-                const input1 = keyInput1.value;
-                const input2 = keyInput2.value;
-                const input3 = keyInput3.value;
-
+            const payload = {
                 
-                if (input2 === KEY50 || input3 === KEY10) {
-                    messageDiv.innerHTML = `
-                        <h2 style="color: #0f0; text-shadow: 0 0 10px #0f0;">SYSTEM DISABLED</h2>
-                        <p>You have overcome the shadows of Phobos.</p>
-                        <p>Congratulations, agent. Send a "COOK" DM.</p> 
-                    `;
-                    keyInput1.value = "";
-                    keyInput2.value = "";
-                    keyInput3.value = "";
-                }
-                // 
-                else if (input1 === KEY20 && input2 === KEY30 && input3 === KEY40) {
-                    document.querySelector('.final-input-area').style.display = 'none';
-                    document.querySelector('.container > p').style.display = 'none';
-                    clearInterval(antiCheatInterval); 
-
-                    messageDiv.innerHTML = `
-                        <h2 style="color: #0f0; text-shadow: 0 0 10px #0f0;">SYSTEM DISABLED</h2>
-                        <p>You have overcome the shadows of Phobos.</p>
-                        <p>Congratulations, agent. Send a "NYAN" DM.</p>
-                    `;
-                } 
-                else if (input1 === KEY20 && input2 === KEY12 && input3 === KEY22) {
-                    document.querySelector('.final-input-area').style.display = 'none';
-                    document.querySelector('.container > p').style.display = 'none';
-                    clearInterval(antiCheatInterval); 
-
-                    messageDiv.innerHTML = `
-                        <h2 style="color: #0f0; text-shadow: 0 0 10px #0f0;">SYSTEM DISABLED</h2>
-                        <p>You have overcome the shadows of Phobos.</p>
-                        <p>Congratulations, agent. Send a "PHOBOS" DM.</p>
-                    `;
-                } 
-                
-                else {
-                   messageDiv.innerHTML = `
-                        <h2 style="color: #0f0; text-shadow: 0 0 10px #0f0;">SYSTEM DISABLED</h2>
-                        <p>You have overcome the shadows of Phobos.</p>
-                        <p>Congratulations, agent. Send a "SKY" DM.</p>
-                    `;
-                }
+                embeds: [{
+                    title: "SYSTEM DISABLED: Agent Authenticated",
+                    color: 65280, 
+                    fields: [
+                        { name: "Agent Ping", value: userMention, inline: true },
+                        { name: "Code", value: code, inline: true }
+                    ],
+                    footer: { text: "Phobos Shadows - Core Authentication" },
+                    timestamp: new Date().toISOString()
+                }]
             };
 
-            button.addEventListener('click', verifyKeys);
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) {
+                    console.error(`Webhook failed with status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error("Error sending webhook:", error);
+            }
+        };
+
+        button.addEventListener('click', () => {
+            const v1 = in1.value, v2 = in2.value, v3 = in3.value;
+            const discordUserId = discordIdIn.value.trim();
+            let successCode = null;
+
+            if (v2 === KEY50 && v3 === KEY10 && v1 === KEY20) successCode = "COOK";
+            else if (v1===KEY20 && v2===KEY30 && v3===KEY40) successCode = "NYAN";
+            else if (v1===KEY20 && v2===KEY12 && v3===KEY22) successCode = "PHOBOS";
+
+            if (successCode) {
+                if (!discordUserId || !/^\d+$/.test(discordUserId)) { // I copy this from internet don't kill me 
+                    msg.innerHTML = `
+                        <h2 style="color:#f9a825;text-shadow:0 0 10px #f9a825;">AUTHENTICATION PAUSED</h2>
+                        <p>Please enter a valid Discord User ID to proceed.</p>
+                    `;
+                    return;
+                }
+            
+                disableAntiCheat();
+                sendToWebhook(discordUserId, successCode);
+
+                document.querySelector('.final-input-area').style.display = 'none';
+                document.querySelector('.container > p').style.display = 'none';
+                msg.innerHTML = `
+                    <h2 style="color:#0f0;text-shadow:0 0 10px #0f0;">SYSTEM DISABLED</h2>
+                    <p>You have overcome the shadows of Phobos.</p>
+                    <p>Congratulations, agent. Your success code "${successCode}" has been registered.</p>
+                `;
+            } else {
+                msg.innerHTML = `
+                    <h2 style="color:#f00;text-shadow:0 0 10px #f00;">ACCESS DENIED</h2>
+                    <p>Protocol keys incorrect. Try again.</p>
+                `;
+            }
+        });
         })();
-    </script>
+   </script>
 </body>
 </html>
