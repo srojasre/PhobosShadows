@@ -35,26 +35,41 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const correctKey = "PhobosTerminal";
-            const inputElement = document.getElementById('key-input');
-            const buttonElement = document.getElementById('verify-button');
-            const feedbackElement = document.getElementById('feedback-message');
-            const nextChallengeElement = document.getElementById('next-challenge');
+    // --- ANTI-CHEAT WRAPPER (IIFE) ---
+    (() => {
+        // --- LAYER 1: KEY OBFUSCATION ---
+        // "PhobosTerminal" in Base64 is "UGhvYm9zVGVybWluYWw="
+        const CORRECT_KEY = atob("UGhvYm9zVGVybWluYWw=");
 
-            buttonElement.addEventListener('click', () => {
-                if (inputElement.value === correctKey) {
-                    feedbackElement.textContent = "ACCESS GRANTED";
-                    feedbackElement.style.color = "#0f0"; // Green
-                    document.querySelector('.input-area').style.display = 'none';
-                    nextChallengeElement.style.display = 'block';
-                } else {
-                    feedbackElement.textContent = "ACCESS DENIED. Try again.";
-                    feedbackElement.style.color = "var(--primary-color)"; // Red
-                    inputElement.value = "";
-                }
-            });
+        // --- LAYER 3: ACTIVE CONSOLE DETECTION ---
+        const antiCheat = () => { debugger; };
+        let antiCheatInterval = setInterval(antiCheat, 1000);
+
+        // --- Puzzle Logic ---
+        const inputElement = document.getElementById('key-input');
+        const buttonElement = document.getElementById('verify-button');
+        const feedbackElement = document.getElementById('feedback-message');
+        const nextChallengeElement = document.getElementById('next-challenge');
+
+        const verify = () => {
+            if (inputElement.value === CORRECT_KEY) {
+                feedbackElement.textContent = "ACCESS GRANTED";
+                feedbackElement.style.color = "#0f0";
+                document.querySelector('.input-area').style.display = 'none';
+                nextChallengeElement.style.display = 'block';
+                clearInterval(antiCheatInterval); // Stop anti-cheat
+            } else {
+                feedbackElement.textContent = "ACCESS DENIED. Try again.";
+                feedbackElement.style.color = "var(--primary-color)";
+                inputElement.value = "";
+            }
+        };
+
+        buttonElement.addEventListener('click', verify);
+        inputElement.addEventListener('keyup', e => {
+            if(e.key === "Enter") verify();
         });
-    </script>
+    })();
+</script>
 </body>
 </html>
