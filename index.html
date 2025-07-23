@@ -50,7 +50,6 @@
 
             let antiCheatInterval = setInterval(antiCheat, 1000);
 
-            // --- Original Puzzle Logic (now protected) ---
             const encryptedTextElement = document.getElementById('encrypted-text');
             const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789*&%$#@!';
             let intervalId = null;
@@ -108,7 +107,6 @@
                     feedbackMessage.style.color = "#0f0";
                     verificationArea.style.display = 'none';
                     nextChallenge.style.display = 'block';
-                    // Stop the anti-cheat once the puzzle is solved.
                     clearInterval(antiCheatInterval);
                 } else {
                     feedbackMessage.textContent = "AUTHENTICATION FAILED. Sequence mismatch.";

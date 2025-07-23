@@ -8,10 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!--
-        [SYSTEM]: Terminal authentication required. 
-        The access key is: PhobosTerminal
-    -->
+    
     <div class="scanline"></div>
     <div class="container">
         <h1 class="flicker">PROTOCOL 2</h1>
@@ -35,17 +32,12 @@
     </div>
 
     <script>
-    // --- ANTI-CHEAT WRAPPER (IIFE) ---
     (() => {
-        // --- LAYER 1: KEY OBFUSCATION ---
-        // "PhobosTerminal" in Base64 is "UGhvYm9zVGVybWluYWw="
         const CORRECT_KEY = atob("UGhvYm9zVGVybWluYWw=");
 
-        // --- LAYER 3: ACTIVE CONSOLE DETECTION ---
         const antiCheat = () => { debugger; };
         let antiCheatInterval = setInterval(antiCheat, 1000);
 
-        // --- Puzzle Logic ---
         const inputElement = document.getElementById('key-input');
         const buttonElement = document.getElementById('verify-button');
         const feedbackElement = document.getElementById('feedback-message');
@@ -57,7 +49,7 @@
                 feedbackElement.style.color = "#0f0";
                 document.querySelector('.input-area').style.display = 'none';
                 nextChallengeElement.style.display = 'block';
-                clearInterval(antiCheatInterval); // Stop anti-cheat
+                clearInterval(antiCheatInterval); 
             } else {
                 feedbackElement.textContent = "ACCESS DENIED. Try again.";
                 feedbackElement.style.color = "var(--primary-color)";
