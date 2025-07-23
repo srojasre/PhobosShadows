@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHOBOS SHADOWS - PROTOCOL 3</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .log-container {
+            border: 1px solid var(--primary-color);
+            padding: 15px;
+            background: #000;
+            text-align: left;
+            margin: 2rem auto;
+            max-width: 600px;
+            white-space: pre-wrap; /* Allows text to wrap */
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="container">
+        <h1 class="flicker">PROTOCOL 3</h1>
+        <p>We've intercepted a corrupted data stream. The override key must be in there.</p>
+
+        <div class="log-container">
+            <pre>
+[14:32:10] INIT_SEQUENCE
+[14:32:11] KERNEL_PANIC... REBOOTING... @#$*&
+[14:32:12] MEM_CHECK: FAILED
+[14:32:14] Loading recovery module...
+[14:32:15] Access override code required: ARES_PROTOCOL_7. Use with caution.
+[14:32:16] ERROR 0xFA7713: SEGMENTATION FAULT
+[14:32:18] Retrying... CONNECTION LOST.
+            </pre>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="key-input" placeholder="ENTER KEY...">
+            <button id="verify-button">VERIFY</button>
+        </div>
+
+        <p id="feedback-message" style="opacity: 0.5; min-height: 24px;"></p>
+
+        <div id="next-challenge" style="display: none;">
+            <p>PROTOCOL KEY 3 ACQUIRED. Record it.</p>
+            <a href="final.html" class="button-link">Access Core</a>
+        </div>
+        
+        <div class="footer">
+            <p>LEVEL CLEAREANCE: O5</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const correctKey = "ARES_PROTOCOL_7";
+            const inputElement = document.getElementById('key-input');
+            const buttonElement = document.getElementById('verify-button');
+            const feedbackElement = document.getElementById('feedback-message');
+            const nextChallengeElement = document.getElementById('next-challenge');
+
+            buttonElement.addEventListener('click', () => {
+                if (inputElement.value === correctKey) {
+                    feedbackElement.textContent = "ACCESS GRANTED";
+                    feedbackElement.style.color = "#0f0";
+                    document.querySelector('.input-area').style.display = 'none';
+                    nextChallengeElement.style.display = 'block';
+                } else {
+                    feedbackElement.textContent = "ACCESS DENIED. Try again.";
+                    feedbackElement.style.color = "var(--primary-color)";
+                    inputElement.value = "";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

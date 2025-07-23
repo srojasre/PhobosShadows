@@ -1,6 +1,6 @@
-/* --- Estilos Generales --- */
+/* --- General Styles --- */
 :root {
-    --primary-color: rgb(255, 0, 0); /* Verde "hacker" */
+    --primary-color: rgb(255, 0, 0); /* Hacker-style red */
     --background-color: #0a0a0a;
     --dark-color: #050505;
     --glow-color: rgba(255, 0, 8, 0.5);
@@ -22,10 +22,10 @@ body {
     align-items: center;
     min-height: 100vh;
     text-shadow: 0 0 5px var(--glow-color);
-    overflow: hidden; /* Oculta el desbordamiento para el efecto scanline */
+    overflow: hidden;
 }
 
-/* --- Efecto de línea de escaneo (CRT) --- */
+/* --- Scanline Effect (CRT) --- */
 .scanline {
     position: fixed;
     top: 0;
@@ -39,7 +39,7 @@ body {
     );
     background-size: 100% 4px;
     z-index: 2;
-    pointer-events: none; /* Permite hacer clic a través de él */
+    pointer-events: none;
     animation: scan 10s linear infinite;
 }
 
@@ -48,8 +48,7 @@ body {
     100% { background-position: 0 100vh; }
 }
 
-
-/* --- Contenedor principal --- */
+/* --- Main Container --- */
 .container {
     text-align: center;
     padding: 20px;
@@ -63,7 +62,6 @@ h1 {
     margin-bottom: 1rem;
 }
 
-/* --- Animación de parpadeo para el título --- */
 .flicker {
     animation: flicker 3s linear infinite;
 }
@@ -89,7 +87,7 @@ p {
     margin-bottom: 2rem;
 }
 
-/* --- Caja del texto encriptado --- */
+/* --- Encrypted Text Box --- */
 #encrypted-box {
     border: 2px solid var(--primary-color);
     padding: 20px 30px;
@@ -104,8 +102,8 @@ p {
     letter-spacing: 5px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    min-height: 48px; /* Evita que la caja salte de tamaño */
-    user-select: none; /* Evita que el texto se pueda seleccionar */
+    min-height: 48px;
+    user-select: none;
 }
 
 #encrypted-text:hover {
@@ -113,14 +111,13 @@ p {
     color: #fff;
 }
 
-/* Estilo para cuando la palabra ya está descifrada */
 #encrypted-text.decrypted {
     color: #fff;
     text-shadow: 0 0 10px #fff, 0 0 20px var(--primary-color);
     cursor: default;
 }
 
-/* --- Pie de página --- */
+/* --- Footer --- */
 .footer {
     position: absolute;
     bottom: 20px;
@@ -132,4 +129,48 @@ p {
     font-size: 0.8rem;
     opacity: 0.5;
     letter-spacing: 2px;
+}
+
+/* --- General Input/Button Styles --- */
+.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid var(--primary-color);
+    background-color: var(--dark-color);
+    color: var(--primary-color);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+}
+
+.button-link:hover {
+    background-color: var(--glow-color-light);
+    color: #fff;
+    text-shadow: 0 0 5px #fff;
+}
+
+.input-area input {
+    background-color: var(--dark-color);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 10px;
+    font-family: 'Source Code Pro', monospace;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+.input-area button {
+    padding: 10px 20px;
+    border: 1px solid var(--primary-color);
+    background-color: var(--dark-color);
+    color: var(--primary-color);
+    font-family: 'Source Code Pro', monospace;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.input-area button:hover {
+    background-color: var(--glow-color-light);
+    color: #fff;
 }

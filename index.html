@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[REDACTED]</title>
+    <title>PHOBOS SHADOWS - PROTOCOL 1</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,13 +16,22 @@
         <p>Security protocol activated. Click the message. Good luck.</p>
         
         <div id="encrypted-box">
-            <!-- 
-              IMPORTANTE: Cambia la palabra dentro de data-palabra-descifrada
-              por la palabra secreta que quieras usar.
-              Ahora respetará mayúsculas y minúsculas.
-              Ejemplo: data-palabra-descifrada="Phobos7"
-            -->
-            <div id="encrypted-text" data-palabra-descifrada="NzYxRjM3">Loading data...</div>
+            <!-- The secret word is revealed here -->
+            <div id="encrypted-text" data-decrypted-word="NzYxRjM3">Loading data...</div>
+        </div>
+
+        <!-- This section is now hidden until the key is revealed -->
+        <div class="input-area" id="verification-area" style="display: none;">
+            <input type="text" id="key-input" placeholder="ENTER REVEALED KEY...">
+            <button id="verify-button">AUTHENTICATE</button>
+        </div>
+
+        <p id="feedback-message" style="opacity: 0.5; min-height: 24px;"></p>
+
+        <!-- This is the final link, hidden until verification is successful -->
+        <div id="next-challenge" style="display: none;">
+            <p>PROTOCOL KEY 1 ACQUIRED. Record it.</p>
+            <a href="puzzle2.html" class="button-link">Initiate Protocol 2</a>
         </div>
 
         <div class="footer">
@@ -33,18 +42,18 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const encryptedTextElement = document.getElementById('encrypted-text');
-            
-            // --- CAMBIO 1: Se eliminó .toUpperCase() ---
-            // Ahora la palabra se toma exactamente como está escrita en el HTML.
-            const decryptedWord = encryptedTextElement.dataset.palabraDescifrada;
-            
-            // --- CAMBIO 2: Se añadieron minúsculas al alfabeto de la animación ---
+            const decryptedWord = encryptedTextElement.dataset.decryptedWord;
             const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789*&%$#@!';
-            
             let intervalId = null;
             let isDecrypting = false;
 
-            // Efecto de texto aleatorio inicial
+            // --- Elements for the new verification step ---
+            const verificationArea = document.getElementById('verification-area');
+            const keyInput = document.getElementById('key-input');
+            const verifyButton = document.getElementById('verify-button');
+            const feedbackMessage = document.getElementById('feedback-message');
+            const nextChallenge = document.getElementById('next-challenge');
+
             const startScramble = () => {
                 if (isDecrypting) return;
                 let scrambleCount = 0;
@@ -62,7 +71,6 @@
                 }, 100);
             };
 
-            // Efecto de descifrado al hacer clic
             const decryptText = () => {
                 if (isDecrypting) return;
                 isDecrypting = true;
@@ -84,13 +92,40 @@
                         clearInterval(interval);
                         encryptedTextElement.textContent = decryptedWord;
                         encryptedTextElement.classList.add('decrypted');
+                        encryptedTextElement.style.cursor = 'default'; // Make it not clickable anymore
+                        
+                        // --- MODIFICATION ---
+                        // Instead of showing the link, show the verification input box.
+                        verificationArea.style.display = 'block';
                     }
 
                     iteration += 1 / 3;
                 }, 50);
             };
 
+            const verifyKey = () => {
+                if (keyInput.value === "KEY") {
+                    feedbackMessage.textContent = "AUTHENTICATION SUCCESSFUL";
+                    feedbackMessage.style.color = "#0f0"; // Green
+                    verificationArea.style.display = 'none'; // Hide input
+                    nextChallenge.style.display = 'block'; // Show final link
+                } else {
+                    feedbackMessage.textContent = "AUTHENTICATION FAILED. Sequence mismatch.";
+                    feedbackMessage.style.color = "var(--primary-color)"; // Red
+                    keyInput.value = ""; // Clear the input
+                }
+            };
+
+            // --- Event Listeners ---
             encryptedTextElement.addEventListener('click', decryptText);
+            verifyButton.addEventListener('click', verifyKey);
+            
+            // Allow pressing Enter to verify
+            keyInput.addEventListener('keyup', (event) => {
+                if (event.key === "Enter") {
+                    verifyKey();
+                }
+            });
 
             startScramble();
         });
