@@ -14,9 +14,9 @@
     <div class="container">
         <h1 class="flicker">PHOBOS SHADOWS</h1>
         <p>Security protocol activated. Click the message. Good luck.</p>
-        
+
         <div id="encrypted-box">
-            <div id="encrypted-text" data-decrypted-word="NEIgNDUgNTk=">Loading data...</div>
+            <div id="encrypted-text" data-decrypted-word="NjggNzQgNzQgNzAgNzMgM0EgMkYgMkYgNzcgNzcgNzcgMkUgNjkgNkUgNzMgNzQgNjEgNjcgNzIgNjEgNkQgMkUgNjMgNkYgNkQgMkYgNzAgNjggNkYgNjIgNkYgNzMgMkUgNzMgNjggNjEgNjQgNkYgNzcgNzMgMkY=">Loading data...</div>
         </div>
 
         <div class="input-area" id="verification-area" style="display: none;">
@@ -36,8 +36,6 @@
         </div>
     </div>
 
-    <script>
-(()=>{const a=atob(document.getElementById('encrypted-text').dataset.decryptedWord),b=atob("U0tZS0VZ"),c=atob("S0VZ"),d=()=>{debugger;};let e=setInterval(d,1e3);const f=document.getElementById('encrypted-text'),g='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789*&%$#@!';let h=null,i=!1;const j=document.getElementById('verification-area'),k=document.getElementById('key-input'),l=document.getElementById('verify-button'),m=document.getElementById('feedback-message'),n=document.getElementById('next-challenge');const o=()=>{if(i)return;let d=0;h=setInterval(()=>{let c='';for(let b=0;b<a.length;b++)c+=g[Math.floor(Math.random()*g.length)];f.textContent=c,d++,d>50&&!i&&(f.textContent='■'.repeat(a.length),clearInterval(h))},100)},p=()=>{if(i)return;i=!0,clearInterval(h);let d=0;const g=setInterval(()=>{f.textContent=a.split('').map((c,b)=>b<d?a[b]:g[Math.floor(Math.random()*g.length)]).join(''),d>=a.length?(clearInterval(g),f.textContent=a,f.classList.add('decrypted'),f.style.cursor='default',j.style.display='block'):d+=1/3},50)},q=()=>{k.value===c?(m.textContent="AUTHENTICATION SUCCESSFUL",m.style.color="#0f0",j.style.display='none',n.style.display='block',clearInterval(e)):(m.textContent="AUTHENTICATION FAILED. Sequence mismatch.",m.style.color="var(--primary-color)",k.value="")};f.addEventListener('click',p),l.addEventListener('click',q),k.addEventListener('keyup',a=>{a.key==="Enter"&&q()}),o()})();
-</script>
+    <script src="protocol_1.js"></script>
 </body>
 </html>
