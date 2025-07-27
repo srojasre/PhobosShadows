@@ -26,13 +26,31 @@
 
         <div class="log-container">
             <pre>
-[14:32:10] INIT_SEQUENCE 0xV2l0cmVjeDY0
-[14:32:11] KERNEL_PANIC... REBOOTING... 0xRGVmZW5kZXJQbGF0ZQ==
-[14:32:12] MEM_CHECK: FAILED 0XQXJ0ZW1pcw== 
-[14:32:14] Loading recovery module... 0xU2t5YXR0YWNrMzk3
-[14:32:15] Access override code required: [CLASSIFIED] Use with caution.
-[14:32:16] ERROR 0xFA7713: SEGMENTATION FAULT
-[14:32:18] Retrying... CONNECTION LOST.
+[14:32:02] BIOS_VERSION = 0x68747470           
+[14:32:03] BIOS_EXT = 0x733A2F2F               
+[14:32:04] CORE_MOUNT_01 = 0x646F6373          
+[14:32:05] CORE_MOUNT_02 = 0x2E676F6F          
+[14:32:06] CORE_MOUNT_03 = 0x676C652E          
+[14:32:07] CORE_MOUNT_04 = 0x636F6D2F          
+[14:32:08] FILESYSTEM_TABLE = 0x646F6375       
+[14:32:09] FILESYSTEM_INDEX = 0x6D656E74       
+[14:32:10] SYS_PATH_ROUTING = 0x2F642F         
+[14:32:11] SECTOR_ID_01 = 0x3164546E           
+[14:32:12] SECTOR_ID_02 = 0x4972496E           
+[14:32:13] SECTOR_ID_03 = 0x546C4755           
+[14:32:14] SECTOR_ID_04 = 0x6A6D665F           
+[14:32:15] SECTOR_ID_05 = 0x41683046           
+[14:32:16] SECTOR_ID_06 = 0x33483171           
+[14:32:17] SECTOR_ID_07 = 0x6D522D75          
+[14:32:18] SECTOR_ID_08 = 0x69576E37          
+[14:32:19] SECTOR_ID_09 = 0x6B585859          
+[14:32:20] SECTOR_ID_10 = 0x6D5A7946           
+[14:32:21] SECTOR_ID_11 = 0x704A7063           
+[14:32:22] CONFIG_MAP = 0x2F656469             
+[14:32:23] CONFIG_MOD = 0x743F7461             
+[14:32:24] CONFIG_END = 0x623D742E30           
+
+
             </pre>
         </div>
 
@@ -45,7 +63,7 @@
 
         <div id="next-challenge" style="display: none;">
             <p>Take note of the code.</p>
-            <a href="dudenedkfieiahdsalsdke.html" class="button-link">Next</a>
+            <a href="final.html" class="button-link">Next</a>
         </div>
         
         <div class="footer">
@@ -53,67 +71,7 @@
         </div>
     </div>
 
-   <script>
-    (() => { // Script 3
-        const KEY2 = atob("QXJ0ZW1pcw==");
-        const KEY1 = atob("QVJFU19QUk9UT0NPTF81");
-        const KEY5 = atob("QVJFU19QUk9UT0NPTF84");
-        const KEY0 = atob("QVJFU19QUk9UT0NPTF8xMA==");
-        
+    <script src="protocol3.js"></script>
 
-        const antiCheat = () => { debugger; };
-        let antiCheatInterval = setInterval(antiCheat, 1000);
-
-        const inputElement = document.getElementById('key-input');
-        const buttonElement = document.getElementById('verify-button');
-        const feedbackElement = document.getElementById('feedback-message');
-        const nextChallengeElement = document.getElementById('next-challenge');
-
-        const verify = () => {
-            if (inputElement.value === KEY2) {
-                feedbackElement.textContent = "ACCESS GRANTED! Send this to Witrec64's DMs."; // Trap
-                feedbackElement.style.color = "#0f0";
-                document.querySelector('.input-area').style.display = 'none';
-                nextChallengeElement.style.display = 'block';
-                clearInterval(antiCheatInterval); // Stop anti-cheat
-            }
-
-            else if (inputElement.value === KEY1) {
-                feedbackElement.textContent = "ACCESS GRANTED! Send this to DefenderPlate's DMs."; // Real
-                feedbackElement.style.color = "#0f0";
-                document.querySelector('.input-area').style.display = 'none';
-                nextChallengeElement.style.display = 'block';
-                clearInterval(antiCheatInterval); // Stop anti-cheat
-            }
-
-            else if (inputElement.value === KEY0) {
-                feedbackElement.textContent = "ACCESS GRANTED! Send this to Skyattack397's DMs."; // Trap
-                feedbackElement.style.color = "#0f0";
-                document.querySelector('.input-area').style.display = 'none';
-                nextChallengeElement.style.display = 'block';
-                clearInterval(antiCheatInterval); // Stop anti-cheat
-            }
-            else if (inputElement.value === KEY5) {
-                feedbackElement.textContent = "ACCESS GRANTED! send this to ElwasauwuXD's DMs."; // real
-                feedbackElement.style.color = "#0f0";
-                document.querySelector('.input-area').style.display = 'none';
-                nextChallengeElement.style.display = 'block';
-                clearInterval(antiCheatInterval); // Stop anti-cheat
-            }
-            
-            
-            else {
-                feedbackElement.textContent = "ACCESS DENIED. Try again.";
-                feedbackElement.style.color = "var(--primary-color)";
-                inputElement.value = "";
-            }
-        };
-
-        buttonElement.addEventListener('click', verify);
-        inputElement.addEventListener('keyup', e => {
-            if(e.key === "Enter") verify();
-        });
-    })();
-</script>
 </body>
 </html>
